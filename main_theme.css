@@ -1,0 +1,35 @@
+body {
+	background: #DEF5E5;
+	display: flex;
+	/* justify-content: center; */
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+}
+
+header {
+    background: #9ED5C5;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+select {
+    background: #FFFBE7;
+    width: 200px;
+    align-content: center;
+}
+
+form {
+	width: 500px;
+	border: 2px solid #ccc;
+	padding: 30px;
+	background: #fff;
+	border-radius: 15px;
+    align-content: center;
+}
+
+h1 {
+	color: #354259;
+}
