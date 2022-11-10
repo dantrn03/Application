@@ -19,17 +19,17 @@
     <h1>Booking!</h1>
     <form method="post">
         <label>
-            Country
+            Location
         </label> 
         <select class = "country_selection" id="country_selection" name="city">
             <?php 
-                $country_query = "SELECT DISTINCT location FROM hotels";
-                $countries = mysqli_query($conn, $country_query);
+                $location_query = "SELECT DISTINCT location FROM hotels";
+                $location_result = mysqli_query($conn, $location_query);
             ?>
             <option value=1>Any</option>
             <?php 
-                if ($countries) {
-                    while ($row = mysqli_fetch_array($countries)) {
+                if ($location_result) {
+                    while ($row = mysqli_fetch_array($location_result)) {
                         $country = $row['location'];
                         echo"<option value=$country>$country</option>";
                     }
@@ -50,6 +50,7 @@
         if (isset($_POST['condition'])) {
             $selected_city_condition = mysqli_escape_string($conn,$_POST['city']);
             $selected_city = ($selected_city_condition == 1) ? "" : " WHERE location = '$selected_city_condition'";
+            // echo $selected_city;
             $select_hotel_query = "SELECT * FROM hotels" . $selected_city;
             $hotels = mysqli_query($conn, $select_hotel_query);
             $_SESSION['start_date'] = $_POST['start_date'];

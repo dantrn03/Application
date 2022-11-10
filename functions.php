@@ -47,16 +47,23 @@ function getAllRooms($row, $start_date, $end_date) {
 
 
     $hoe_name = $row['hotel_id'];
-    $available_rooms_query = 
-        "SELECT *
+    $available_rooms_query = "
+        SELECT *
         FROM rooms 
         WHERE hotel_id=$hoe_name
         AND room_no 
         NOT IN (
             SELECT room_no 
-            FROM bookings 
-            WHERE hotel_id = $hoe_name 
-            AND NOT(DATE(date_to) <= '$start_date' 
+            FROM (
+                SELECT details.reservation_id as reservation_id,
+                reservations.date_from, reservations.date_to, 
+                details.room_no, reservations.hotel_id
+                FROM details 
+                LEFT JOIN reservations 
+                ON details.reservation_id = reservations.reservation_id
+            ) as a
+            WHERE hotel_id = $hoe_name
+            AND NOT(DATE(date_to) <= '$start_date'
                 OR DATE(date_from) >= '$end_date')
         )";
     $available_rooms_res = mysqli_query($conn, $available_rooms_query);
@@ -64,6 +71,8 @@ function getAllRooms($row, $start_date, $end_date) {
     //     echo $rrow['room_no']. "<br>";
     // }
     return $available_rooms_res;
+
+    // SELECT 
 }
 
 function getRoomsLeft($available_rooms) {

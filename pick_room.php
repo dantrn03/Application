@@ -22,14 +22,14 @@
         //         echo"<p>$room_no</p>";
         //     }
         // }
-        echo $_SESSION['name']. "<br>";
+        // echo $_SESSION['name']. "<br>";
         // echo $_SESSION['chosen_hotel_id'];
         // echo $_SESSION['start_date'] . $_SESSION['end_date'];
         $test = $_SESSION['chosen_hotel_id'];
         $chosen_hotel_query = "SELECT * FROM hotels WHERE hotel_id = '$test'";
         $chosen_hotel_res = mysqli_query($conn, $chosen_hotel_query);
         $chosen_hotel_row = mysqli_fetch_array($chosen_hotel_res);
-        echo $chosen_hotel_row['hotel_id'] . " " . $chosen_hotel_row['name'];
+        echo $chosen_hotel_row['hotel_id'] . " " . $chosen_hotel_row['name'] . "<br>";
         $avilable_rooms = getAllRooms($chosen_hotel_row, $_SESSION['start_date'], $_SESSION['end_date']);
         while ($row = mysqli_fetch_array($avilable_rooms)) {
             echo $row['hotel_id'] . " " . $row['room_no'] . " " . $row['price_per_night'] . "<br>";
