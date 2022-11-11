@@ -13,6 +13,7 @@
             <li><a class="active" href = "home.php">Home</a></li>
             <li><a href = "booking.php">Booking</a></li>
             <li><a href = "service_info.php">Service</a></li>
+            <li><a href="history.php">History</a></li>
             <li><a href="logout.php">Log Out</a></li>
         </ul>
     </nav>

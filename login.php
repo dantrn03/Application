@@ -10,6 +10,7 @@ if(isset($_POST['login'])){
 	if(mysqli_num_rows($result)>0){
 		$user = mysqli_fetch_array($result);
 		$_SESSION['name'] = $user['first_name'];
+		$_SESSION['user_id'] = $user['user_id'];
 		header('location:home.php');
 	}
 }
