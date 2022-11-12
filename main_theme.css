@@ -16,7 +16,7 @@ header {
 }
 
 select {
-    background: #FFFBE7;
+    background: #DEF5E5;
     width: 200px;
     align-content: center;
 }
@@ -28,8 +28,46 @@ form {
 	background: #fff;
 	border-radius: 15px;
     align-content: center;
+	margin: 10px;
 }
 
 h1 {
 	color: #354259;
+}
+
+/* label {
+	
+} */
+
+.condition {
+	position: absolute;
+	left: 40%;
+	background-color: white;
+}
+
+.hotel_info {
+	position: absolute;
+	left: 40%;
+}
+
+#row {
+	text-align: center;
+}
+
+#hotel_info, #title {
+	display: inline;
+}
+
+.var{
+	position: absolute;
+	left: 40%;
+}
+
+table, th, td {
+	border: 1px solid;
+  }
+
+.history {
+	background-color: white;
+	width: 60%;
 }

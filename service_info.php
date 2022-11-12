@@ -18,10 +18,16 @@
     <h1>Service</h1>
     <?php 
         if ($res) {
+            echo "<table><tr><th>Name</th><th>Description </th><tr/>";
             while ($row = mysqli_fetch_array($res)) {
                 $name = $row['name'];
                 $description = $row['description'];
-                echo"<p>$name: $description</p>";
+                echo "<tr>
+                        <td>$name</th>
+                        <td>$description </th>
+                    <tr/>
+                    ";
+                // echo"<p>$name: $description</p>";
             }
         }
     ?>

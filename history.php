@@ -3,9 +3,9 @@
     @include 'db_conn.php';
     @include 'functions.php';
     @include 'navbar.php';
-    echo $_SESSION['user_id'];
-    echo $_SESSION['name'];
-    echo "<br>";
+    // echo $_SESSION['user_id'];
+    // echo "<br>";
+
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="main_theme.css">
 </head>
 <body>
+    <h1>History</h1>
     <?php
         getHistories($_SESSION['user_id']);
     ?>

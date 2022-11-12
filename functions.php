@@ -8,12 +8,12 @@ function createHotels($hotels, $start_date, $end_date) {
         $capacity = 0;
 
         while ($rrow = mysqli_fetch_array($available_rooms)) {
-            echo $rrow['hotel_id']. ": " . $rrow['room_no'] . ", " . $rrow['price_per_night'] . "<br>";
+            // echo $rrow['hotel_id']. ": " . $rrow['room_no'] . ", " . $rrow['price_per_night'] . "<br>";
             $rooms_left++;
             $capacity += $rrow['no_of_people'];
         }
 
-        echo $rooms_left . " " . $capacity;
+        // echo $rooms_left . " " . $capacity;
 
         $hoe = $row['hotel_id'];
         $hoe_name = $row['name'];
@@ -24,10 +24,12 @@ function createHotels($hotels, $start_date, $end_date) {
         $service_name = $service_row['name'];
         $element = "
         <form class=\"div-box\"  /*action=\"pick_room.php\"*/ method=\"POST\" >
-        <div class=\"child1\"><p>$service_name</p></div>
-        <div class=\"child2\">
-            <p>$hoe_name</p>
-            <input type=\"submit\" class=\"\" name=\"book_hotel\" value=\"Buy Now\"></input>
+        <div><lable>Hotel</lable> <label class = \"var\">: $hoe_name </label> </div><br>
+        <div> Service</lable> <label class = \"var\">: $service_name</label></div><br>
+        <div>Rooms left </lable> <label class = \"var\">: $rooms_left</label></div><br>
+        <div>Capacity left </lable> <label class = \"var\">: $capacity </label></div><br>
+        <div>
+            <input type=\"submit\" class=\"\" name=\"book_hotel\" value=\"Book Now\"></input>
             <input type=\"hidden\" name =\"chosen_hotel_id\" value=$hoe  >
         </div>
         </form>
@@ -80,8 +82,18 @@ function getHistories($user_id) {
     $query = "SELECT * FROM reservations WHERE user_id = $user_id";
     $res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($res)) {
-        echo $row['reservation_id'] . " " . $row['user_id'] . " " . "<br>";
+
+        $rev_id = $row['reservation_id'];
+        $rev_query = "SELECT * FROM details WHERE reservation_id = $rev_id";
+        $rev_res = mysqli_query($conn, $rev_query);
+        $tmp = mysqli_fetch_array($rev_res);
+        $current_hotel_id = $tmp['hotel_id'];
+        $hotel_name_query = "SELECT * FROM hotels WHERE hotel_id = $current_hotel_id";
+        $hotel_name_res = mysqli_query($conn, $hotel_name_query);
+        $tmp = mysqli_fetch_array($hotel_name_res);
+        echo "<div class = \"history\"> Reservation id: <label class=\"var\">". $row['reservation_id'] . "</label><br>Hotel name:<label class=\"var\">" . $tmp['name']. " " . "</label><br>Rooms: <br>";
         createHistory($row['reservation_id']);
+        echo "</div><br>";
     }
     
 }
@@ -91,10 +103,44 @@ function createHistory($reservation_id) {
     $query = "SELECT * FROM details WHERE reservation_id = $reservation_id";
     $res = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($res)) {
-        echo $row['reservation_id'] . " " . $row['hotel_id'] . " " . $row['room_no'] . "<br>";
+        echo "<label class=\"var\">". $row['room_no'] . "</label><br>";
+
     }
 }
 
 function createReservation() {
     @include 'db_conn.php';
+}
+
+function createLocationSelection() {
+    @include 'db_conn.php';
+
+    $location_query = "SELECT DISTINCT location FROM hotels";
+    $location_result = mysqli_query($conn, $location_query);
+    echo "<select class = \"condition\" id=\"country_selection\" name=\"city\">
+    <option value=0>Any</option>";
+        if ($location_result) {
+            while ($row = mysqli_fetch_array($location_result)) {
+                $country = $row['location'];
+                echo"<option value=$country>$country</option>";
+            }
+        }
+    echo "</select>";
+}
+
+function createServiceSelection() {
+    @include 'db_conn.php';
+
+    $service_query = "SELECT DISTINCT * FROM services";
+    $service_result = mysqli_query($conn, $service_query);
+    echo "<select class = \"condition\" id=\"service_selection\" name=\"service\">
+    <option value=0>Any</option>";
+        if ($service_result) {
+            while ($row = mysqli_fetch_array($service_result)) {
+                $service_id = $row['service_id'];
+                $service_name = $row['name'];
+                echo"<option value=$service_id>$service_name</option>";
+            }
+        }
+    echo "</select>";
 }
