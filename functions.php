@@ -1,6 +1,7 @@
 <?php
 
 function createHotels($hotels, $start_date, $end_date) {
+    // echo "Hell0";
     @include 'db_conn.php';
     while ($row = mysqli_fetch_array($hotels)) {
         $available_rooms = getAllRooms($row, $start_date, $end_date);
@@ -17,16 +18,21 @@ function createHotels($hotels, $start_date, $end_date) {
 
         $hoe = $row['hotel_id'];
         $hoe_name = $row['name'];
-        $service = $row['service_id'];
-        $service_query = "SELECT name FROM services WHERE service_id='$service'";
+        // $service = $row['service_id'];
+        $service_query = "SELECT name FROM provide INNER JOIN services ON provide.service_id = services.service_id WHERE hotel_id = $hoe";
+        // echo $service_query;
         $service_res = mysqli_query($conn, $service_query);
-        $service_row = mysqli_fetch_array($service_res);
-        $service_name = $service_row['name'];
+        // $service_row = mysqli_fetch_array($service_res);
+        // $service_name = $service_row['name'];
         $element = "
         <form class=\"div-box\"  /*action=\"pick_room.php\"*/ method=\"POST\" >
         <div><lable>Hotel</lable> <label class = \"var\">: $hoe_name </label> </div><br>
-        <div> Service</lable> <label class = \"var\">: $service_name</label></div><br>
-        <div>Rooms left </lable> <label class = \"var\">: $rooms_left</label></div><br>
+        <div> Service</lable> <label class = \"var\">: </label></div>";
+        while ($service_detail = mysqli_fetch_array($service_res)) {
+            $element = $element . $service_detail['name'] . "<br>";
+        }
+
+        $element = $element . "<div>Rooms left </lable> <label class = \"var\">: $rooms_left</label></div><br>
         <div>Capacity left </lable> <label class = \"var\">: $capacity </label></div><br>
         <div>
             <input type=\"submit\" class=\"\" name=\"book_hotel\" value=\"Book Now\"></input>
@@ -34,6 +40,8 @@ function createHotels($hotels, $start_date, $end_date) {
         </div>
         </form>
         ";
+
+        // <div> Service</lable> <label class = \"var\">: $service_name</label></div><br>
         echo $element;
     }
 }
@@ -130,17 +138,20 @@ function createLocationSelection() {
 
 function createServiceSelection() {
     @include 'db_conn.php';
+    // echo "Create serviceSelection";
 
     $service_query = "SELECT DISTINCT * FROM services";
     $service_result = mysqli_query($conn, $service_query);
-    echo "<select class = \"condition\" id=\"service_selection\" name=\"service\">
-    <option value=0>Any</option>";
+    // echo "<select class = \"condition\" id=\"service_selection\" name=\"service\">
+    // <option value=0>Any</option>";
         if ($service_result) {
             while ($row = mysqli_fetch_array($service_result)) {
                 $service_id = $row['service_id'];
                 $service_name = $row['name'];
-                echo"<option value=$service_id>$service_name</option>";
+                // echo"<option value=$service_id>$service_name</option>";
+                echo "<input type = checkbox name=\"chosen_services[]\" value=" . $row['service_id']  . "> $service_name <br>";
             }
         }
     echo "</select>";
+    // echo "complete";
 }
