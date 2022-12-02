@@ -14,16 +14,11 @@
     <link rel="stylesheet" type="text/css" href="main_theme.css">
 </head>
 <body>
-    provide!
-    <!-- <form method="post">
-        select from provide
-        <input type="submit" name="addProvide" value="Add">
-    </form> -->
     <form method="post">
     <?php
         $hotel_query = "SELECT hotel_id, name FROM hotels";
         $hotel_res = mysqli_query($conn, $hotel_query);
-        echo "<select class = \"condition\" id=\"hotelIDs\" name=\"hotel\">";
+        echo "<select id=\"hotelIDs\" name=\"hotel\">";
         // <option value=0>Any</option>";
         if ($hotel_res) {
             while ($row = mysqli_fetch_array($hotel_res)) {
@@ -33,6 +28,7 @@
         }
         echo "</select>"; 
     ?>
+    <br><br>
         <input type="submit" name="pickHotel" value="Next">
     </form>
     <?php
@@ -41,12 +37,12 @@
             echo "<form method=\"post\">";
             $newServiceQuery = "SELECT service_id, name FROM services WHERE service_id NOT IN (SELECT service_id FROM provide WHERE hotel_id = " . $_POST['hotel'] . ")";
             createCheckboxesFromQuery($newServiceQuery, "added_services", "service_id", "name");
-            echo "<input type=\"submit\" name=\"addService\" value=\"Add\">
+            echo "<input class=\"submitButton\" type=\"submit\" name=\"addService\" value=\"Add\">
             </form>
             <form method=\"post\">";
             $existedServiceQuery = "SELECT services.service_id, name FROM services LEFT JOIN provide ON services.service_id = provide.service_id WHERE hotel_id = " . $_POST['hotel'];
             createCheckboxesFromQuery($existedServiceQuery, "deleted_services", "service_id", "name");
-            echo "<input type=\"submit\" name=\"deleteService\" value=\"Delete\">
+            echo "<input class=\"submitButton\" type=\"submit\" name=\"deleteService\" value=\"Delete\">
             </form>";
         }
         if (isset($_POST['addService'])) {
@@ -58,7 +54,7 @@
                     $insertProvideQuery = $insertProvideQuery . ", (" . $_SESSION['chosen_hotel_to_modify_service'] . ", " . $_POST['added_services'][$i] . ")";
                 }
                 mysqli_query($conn, $insertProvideQuery);
-                echo $insertProvideQuery;
+                // echo $insertProvideQuery;
             }
         }
         if (isset($_POST['deleteService'])) {
@@ -71,7 +67,7 @@
                 }
                 $deleteProvideQuery = $deleteProvideQuery . ")";
                 mysqli_query($conn, $deleteProvideQuery);
-                echo $deleteProvideQuery;
+                // echo $deleteProvideQuery;
             }
         }
     ?>

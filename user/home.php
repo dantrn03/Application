@@ -20,6 +20,7 @@
     </h2>
     <p>It's our pleasure to make your day :></p>
     <p>Let's take a look at our best hotel</p>
-    <img src="homeimg.jpg">
+    <div><img src="homeimg.jpg"></div>
+
 </body>
 </html>

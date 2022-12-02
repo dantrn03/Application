@@ -32,7 +32,7 @@
         foreach($_POST['chosen_rooms'] as $value) {
             $insert_details_query = "INSERT INTO details (reservation_id, hotel_id, room_no) VALUES (" . $last_id . "," . $_SESSION['chosen_hotel_id'] . "," . $value . ")" ;
             mysqli_query($conn, $insert_details_query);
-            echo $value . "<br>";
+            // echo $value . "<br>";
         }
     }
     else {

@@ -14,7 +14,7 @@
                 $deleteServiceQuery = $deleteServiceQuery . " OR service_id = " . $_POST['chosen_services'][$i];
             }
             mysqli_query($conn, $deleteServiceQuery);
-            echo $deleteServiceQuery;
+            // echo $deleteServiceQuery;
             echo "<br>";
         } else {
             echo '<script>alert("Must pick at least one service to delete")</script>';
@@ -24,12 +24,18 @@
     if (isset($_POST['add_service'])) {
         // echo "adding service";
         if ($_POST['name'] == "" || $_POST['description'] == "") {
-            echo "ERROR";
+            echo "Invalid input";
             // echo "<script>confirm(\"Press a button!\");</script>";
         } else {
-            $addServiceQuery = "INSERT INTO services (name, description) VALUES ('" . $_POST['name'] . "','" . $_POST['description'] . "')";
-            mysqli_query($conn, $addServiceQuery);
-            echo $addServiceQuery;
+            $dum = "SELECT name FROM services WHERE name = '" . $_POST['name'] . "'";
+            $dumRes = mysqli_query($conn, $dum);
+            if (mysqli_num_rows($dumRes) > 0) {
+                echo "Service already existed";
+            } else {
+                $addServiceQuery = "INSERT INTO services (name, description) VALUES ('" . $_POST['name'] . "','" . $_POST['description'] . "')";
+                mysqli_query($conn, $addServiceQuery);
+                // echo $addServiceQuery;
+            }
         } 
     }
 ?>

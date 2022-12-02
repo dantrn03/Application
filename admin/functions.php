@@ -18,7 +18,7 @@ function createCheckboxesFromQuery($query, $name, $value, $display) {
     $query_res = mysqli_query($conn, $query);
     if ($query_res) {
         while ($row = mysqli_fetch_array($query_res)) {
-            echo "<input type = checkbox name=\"" . $name . "[]\" value=" . $row[$value]  . ">" . $row[$display] . "<br>";
+            echo "<input class = \"inputcheckbox\" type = checkbox name=\"" . $name . "[]\" value=" . $row[$value]  . "> " . $row[$display] . "<br>";
         }       
     } else {
         echo "fail";

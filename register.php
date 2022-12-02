@@ -23,7 +23,14 @@ if(isset($_POST['submit'])){
       if($pass != $cpass){
          $error[] = 'password not matched!';
       }else{
-         $insert = "INSERT INTO users(email, password, first_name, last_name) VALUES('$email','$pass','$first_name','$last_name')";
+         $account_type = "";
+         if ($_POST['account_type'] == 0) {
+            $account_type = "user";
+         } else {
+            $account_type = "admin";
+         }
+
+         $insert = "INSERT INTO users(email, password, first_name, last_name, account_type) VALUES('$email','$pass','$first_name','$last_name','$account_type')";
          mysqli_query($conn, $insert);
          header('location:login.php');
       }
@@ -61,7 +68,12 @@ if(isset($_POST['submit'])){
       <input type="email" name="email" required placeholder="enter your email">
       <input type="password" name="password" required placeholder="enter your password">
       <input type="password" name="cpassword" required placeholder="confirm your password">
+      <select name="account_type">
+         <option value=0>user</option>
+         <option value=1>admin</option>
+      </select>
       <input type="submit" name="submit" value="register now" class="form-btn">
+      
       <p>already have an account? <a href="login.php">login now</a></p>
    </form>
 

@@ -9,6 +9,8 @@ body {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%;
+	background-attachment: fixed;
+	font-size: 25px;
 }
 
 header {
@@ -19,11 +21,6 @@ header {
     width: 100%;
 }
 
-select {
-    background: #DEF5E5;
-    width: 200px;
-    align-content: center;
-}
 
 form {
 	width: 500px;
@@ -74,4 +71,31 @@ table, th, td {
 .history {
 	background-color: white;
 	width: 60%;
+}
+.inputcheckbox{
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.submitButton {
+	margin-top: 10px;
+}
+
+input {
+	font-size: 20px;
+	margin: 10px;
+}
+
+select {
+	font-size: 20px;
+	width: 350px;
+	height: 30px;
+}
+
+.adminhome{
+	font-size: 40px;
+	margin: 10px;
+	background-color: beige;
+	width: 150px;
+
 }

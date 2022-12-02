@@ -16,7 +16,7 @@
             mysqli_query($conn, $deleteHotelQuery);
             $additionaldeletequery = "DELETE FROM reservations WHERE reservation_id NOT IN (SELECT reservation_id FROM details)";
             mysqli_query($conn, $additionaldeletequery);
-            echo $deleteHotelQuery;
+            // echo $deleteHotelQuery;
             echo "<br>";
         } else {
             echo '<script>alert("Must pick at least one hotel to delete")</script>';
@@ -37,7 +37,7 @@
             } else {
                 $addHotelQuery = "INSERT INTO hotels (name, location) VALUES ('" . $_POST['name'] . "','" . $_POST['location'] . "')";
                 mysqli_query($conn, $addHotelQuery);
-                echo $addHotelQuery;
+                // echo $addHotelQuery;
                 echo "<br>";
             }
         } 

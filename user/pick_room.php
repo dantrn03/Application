@@ -20,12 +20,17 @@
         $chosen_hotel_query = "SELECT * FROM hotels WHERE hotel_id = '$test'";
         $chosen_hotel_res = mysqli_query($conn, $chosen_hotel_query);
         $chosen_hotel_row = mysqli_fetch_array($chosen_hotel_res);
-        echo $chosen_hotel_row ['hotel_id'] . " " . $chosen_hotel_row['name'] . " " . $_SESSION['start_date'] . " " . $_SESSION['end_date'] . "<br>";
+        // echo $chosen_hotel_row['hotel_id'] . " " . $chosen_hotel_row['name'] . " " . $_SESSION['start_date'] . " " . $_SESSION['end_date'] . "<br>";
         $avilable_rooms = getAllRooms($chosen_hotel_row, $_SESSION['start_date'], $_SESSION['end_date']);
         echo "<form action=\"confirm_reservation.php\" method=\"post\">";
         while ($row = mysqli_fetch_array($avilable_rooms)) {
-            echo "<div>" . " Room number: " . $row['room_no'] . ", price_per_night: " . $row['price_per_night'] . ", max number of people: " . $row['no_of_people'];
-            echo  ": " . "<input type=checkbox name=\"chosen_rooms[]\" value=" . $row['room_no']  . "></div><br>";
+            // echo "<div>" . " Room number: " . $row['room_no'] . ", price_per_night: " . $row['price_per_night'] . ", max number of people: " . $row['no_of_people'];
+            echo "<div><div class=\"bord\"><input type=checkbox name=\"chosen_rooms[]\" value=" . $row['room_no']  . ">
+            Room number:  " . $row['room_no'] . "</div><div class=\"bord\">" .
+            "Price Per Night: ". $row['price_per_night'] . "<br>" .
+            "Capacity: " . $row['no_of_people'] . "</div>" .
+            
+            "</div><br>";
         };
         echo "<input type=\"submit\" value=\"confirm\">";
         echo "</form>";

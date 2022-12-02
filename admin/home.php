@@ -15,6 +15,11 @@
     <link rel="stylesheet" type="text/css" href="main_theme.css">
 </head>
 <body>
-    hi admin <?php echo $_SESSION['name']; ?>
+    <h1> Hello admin <?php echo $_SESSION['name']; ?> </h1>
+    <h3> What do you want to modify today?</h3>
+        <div class="adminhome"><a href = "hotel.php">Hotel</a></div>
+        <div class="adminhome"><a href = "service.php">Service</a></div>
+        <div class="adminhome"><a href="provide.php">Provide</a></div>
+        <div class="adminhome"><a href="rooms.php">Rooms</a></div>
 </body>
 </html>

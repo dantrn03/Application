@@ -11,7 +11,11 @@ if(isset($_POST['login'])){
 		$user = mysqli_fetch_array($result);
 		$_SESSION['name'] = $user['first_name'];
 		$_SESSION['user_id'] = $user['user_id'];
-		header('location:home.php');
+		if ($user['account_type'] == "user") {
+			header('location:user/home.php');
+		} else {
+			header('location:admin/home.php');
+		}
 	}
 }
 

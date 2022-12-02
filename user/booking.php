@@ -43,17 +43,6 @@
     <?php 
         if (isset($_POST['condition'])) {
             $selected_city_condition = mysqli_escape_string($conn,$_POST['city']);
-            // echo "condition";
-            // $selected_service_condition = mysqli_escape_string($conn, $_POST['service']);
-            // echo "Hiii" . $selected_city_condition. " " . $selected_service_condition . "<br>";
-            // $selected_city = ($selected_city_condition == 0) ? "" : " WHERE location = '$selected_city_condition'";
-            // foreach($_POST['chosen_services'] as $value) {
-            //     // $insert_details_query = "INSERT INTO details (reservation_id, hotel_id, room_no) VALUES (" . $last_id . "," . $_SESSION['chosen_hotel_id'] . "," . $value . ")" ;
-            //     // mysqli_query($conn, $insert_details_query);
-            //     // echo $value . "<br>";
-            //     echo $value. "<br>";
-            // }
-            // echo sizeof($_POST['chosen_services']);
             $condition = "";
             if ($selected_city_condition != 0 && isset($_POST['chosen_services'])) {
                 $condition = " WHERE location = '$selected_city_condition' AND hotel_id IN (
@@ -87,7 +76,7 @@
             // echo $condition;
             // echo $selected_city;
             $select_hotel_query = "SELECT * FROM hotels" . $condition;
-            echo $select_hotel_query;
+            // echo $select_hotel_query;
             $hotels = mysqli_query($conn, $select_hotel_query);
             $_SESSION['start_date'] = $_POST['start_date'];
             $_SESSION['end_date'] = $_POST['end_date'];

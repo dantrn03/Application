@@ -31,6 +31,7 @@ function createHotels($hotels, $start_date, $end_date) {
         while ($service_detail = mysqli_fetch_array($service_res)) {
             $element = $element . $service_detail['name'] . "<br>";
         }
+        $element = $element . "<br>";
 
         $element = $element . "<div>Rooms left </lable> <label class = \"var\">: $rooms_left</label></div><br>
         <div>Capacity left </lable> <label class = \"var\">: $capacity </label></div><br>
@@ -99,7 +100,7 @@ function getHistories($user_id) {
         $hotel_name_query = "SELECT * FROM hotels WHERE hotel_id = $current_hotel_id";
         $hotel_name_res = mysqli_query($conn, $hotel_name_query);
         $tmp = mysqli_fetch_array($hotel_name_res);
-        echo "<div class = \"history\"> Reservation id: <label class=\"var\">". $row['reservation_id'] . "</label><br>Hotel name:<label class=\"var\">" . $tmp['name']. " " . "</label><br>Rooms: <br>";
+        echo "<div class = \"history\"> Reservation id: <label class=\"var\">". $row['reservation_id'] . "</label><br>Hotel name:<label class=\"var\">" . $tmp['name']. " " . "</label><br>Rooms:";
         createHistory($row['reservation_id']);
         echo "</div><br>";
     }

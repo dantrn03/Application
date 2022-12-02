@@ -8,6 +8,8 @@ body {
 	background-image: url('../bg5.jpg');
 	background-position: center;
 	background-size: 100%;
+	background-attachment: fixed;
+	font-size: 25px;
 }
 
 header {
@@ -16,12 +18,6 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-}
-
-select {
-    background: #DEF5E5;
-    width: 200px;
-    align-content: center;
 }
 
 form {
@@ -63,14 +59,30 @@ h1 {
 
 .var{
 	position: absolute;
-	left: 40%;
+	left: 43%;
 }
 
-table, th, td {
+ th, td {
 	border: 1px solid;
+	margin: 0%;
   }
 
 .history {
 	background-color: white;
 	width: 60%;
+}
+
+input {
+	font-size: 20px;
+	margin: 10px;
+}
+
+select {
+	font-size: 20px;
+	margin-right: 10px;
+	width: 350px;
+}
+
+.bord{
+	border: #354259 solid 1px;
 }
